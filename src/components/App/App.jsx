@@ -36,14 +36,13 @@ export default function App() {
               return Promise.reject(new Error('Failed to find any images'));
             })
             .then(pictures => {
-            if (!pictures.total) {
-                alert('Did find anything, mate !');
-                setStatus('rejected');
-            }
-            return pictures;
-            })
-            .catch(error => setError(error) && setStatus('rejected'));
-        };
+                if (!pictures.total) {
+                  alert('Did find anything, mate');
+                }
+                return pictures;
+              })
+              .catch(error => setError(error) && setStatus('rejected'));
+          };
         fetchImg().then(pictures => {
           const selectedProperties = pictures.hits.map(
             ({ id, largeImageURL, webformatURL }) => {
@@ -58,6 +57,8 @@ export default function App() {
 
     const handleFormSubmit = query => {
         setQuery(query);
+        setPage(1);
+        setPictures([]);
     }
 
     const loadMore = () => {
